@@ -387,6 +387,7 @@
         return;
       }
       viejo.replaceWith(nuevo);
+      if (doc.body) document.body.className = doc.body.className;
       document.title = doc.title;
       var etiqueta = doc.querySelector(".pagina-actual");
       var actual = document.querySelector(".pagina-actual");
