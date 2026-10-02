@@ -1,0 +1,117 @@
+.aurora {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+
+.aurora.viva {
+  opacity: 1;
+}
+
+.aurora-css {
+  background:
+    radial-gradient(60% 60% at 20% 30%, color-mix(in oklab, var(--clay) 26%, transparent), transparent 70%),
+    radial-gradient(50% 50% at 80% 20%, color-mix(in oklab, var(--mint) 22%, transparent), transparent 70%),
+    radial-gradient(70% 70% at 60% 90%, color-mix(in oklab, var(--sky-deep) 70%, transparent), transparent 70%);
+  animation: respirar 14s ease-in-out infinite alternate;
+}
+
+@keyframes respirar {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.12) translate3d(-2%, -1.5%, 0);
+  }
+}
+
+.tiene-aurora > .contenedor {
+  position: relative;
+  z-index: 1;
+}
+
+.velo {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: oklch(0.35 0.08 185);
+  pointer-events: none;
+  clip-path: circle(0% at var(--vx, 50%) var(--vy, 50%));
+  transition: clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.velo.entra {
+  clip-path: circle(150% at var(--vx, 50%) var(--vy, 50%));
+}
+
+.velo.sale {
+  transition: clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+  clip-path: circle(0% at var(--vx, 50%) var(--vy, 50%));
+}
+
+.relieve {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.relieve::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    18rem 18rem at var(--luz-x, 50%) var(--luz-y, 50%),
+    color-mix(in oklab, var(--bone) 42%, transparent),
+    transparent 65%
+  );
+  mix-blend-mode: soft-light;
+}
+
+.relieve.encendida::after {
+  opacity: 1;
+}
+
+.seccion-actual {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--stone);
+  overflow: hidden;
+  height: 1em;
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .seccion-actual {
+    display: block;
+  }
+}
+
+.seccion-actual span {
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mezcla {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora,
+  .velo,
+  .relieve {
+    transition: none;
+    animation: none;
+  }
+}
